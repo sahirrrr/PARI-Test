@@ -2,8 +2,9 @@ package repo
 
 type postgresql struct{ tc SQLTxConn }
 
-//nolint:interfacebloat
 type PostgreSQL interface {
+	ItemsRespository
+	ItemDetailsRespository
 }
 
 func NewPostgreSQL(txc SQLTxConn) PostgreSQL { return &postgresql{txc} }
