@@ -11,5 +11,6 @@ select
 	id.price 
 from pari.items i
 left join pari.item_details id on id.item_id = i.id
+order by id.created_at desc
 limit $1
 offset $2;
