@@ -1,0 +1,839 @@
+{
+	"info": {
+		"_postman_id": "bd0c6a72-02b5-47c1-b5ac-168fb6f85d4f",
+		"name": "Pari Items",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "15050669",
+		"_collection_link": "https://www.postman.com/blaupilzhd/workspace/pari/collection/15050669-bd0c6a72-02b5-47c1-b5ac-168fb6f85d4f?action=share&source=collection_link&creator=15050669"
+	},
+	"item": [
+		{
+			"name": "List Items",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"description": "### GET /items\n\nThis endpoint retrieves a list of items with the ability to paginate the results.\n\n#### Request\n\n- Method: GET\n    \n- URL: `localhost:8089/items`\n    \n- Query Parameters:\n    \n    - `offset` (integer, required): The offset for paginating the results.\n        \n    - `limit` (integer, required): The maximum number of items to retrieve.\n        \n\n#### Response\n\nThe response is in JSON format with the following schema:\n\n``` json\n{\n    \"status\": integer,\n    \"message\": {\n        \"en\": string,\n        \"id\": string\n    },\n    \"data\": [\n        {\n            \"id\": integer,\n            \"name\": string,\n            \"data\": {\n                \"item_details_id\": integer,\n                \"cpu_model\": string,\n                \"ram\": string,\n                \"year\": integer,\n                \"screen_size\": string,\n                \"color\": string,\n                \"price\": integer\n            }\n        }\n    ]\n}\n\n ```\n\n- `status` (integer): The status code of the response.\n    \n- `message` (object): An object containing localized message strings.\n    \n    - `en` (string): English message.\n        \n    - `id` (string): Message ID.\n        \n- `data` (array): An array of items with the following properties:\n    \n    - `id` (integer): The unique identifier of the item.\n        \n    - `name` (string): The name of the item.\n        \n    - `data` (object): Additional details of the item.\n        \n        - `item_details_id` (integer): The unique identifier of the item details.\n            \n        - `cpu_model` (string): The CPU model of the item.\n            \n        - `ram` (string): The RAM specification of the item.\n            \n        - `year` (integer): The manufacturing year of the item.\n            \n        - `screen_size` (string): The screen size of the item.\n            \n        - `color` (string): The color of the item.\n            \n        - `price` (integer): The price of the item."
+			},
+			"response": [
+				{
+					"name": "Limit minimum error",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8089/items?offset=0&limit=0",
+							"host": [
+								"localhost"
+							],
+							"port": "8089",
+							"path": [
+								"items"
+							],
+							"query": [
+								{
+									"key": "offset",
+									"value": "0"
+								},
+								{
+									"key": "limit",
+									"value": "0"
+								}
+							]
+						}
+					},
+					"status": "Bad Request",
+					"code": 400,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json",
+							"description": "",
+							"type": "text"
+						}
+					],
+					"cookie": [],
+					"body": "{\r\n    \"status\": 400,\r\n    \"message\": {\r\n        \"en\": \"Failed\",\r\n        \"id\": \"Gagal\"\r\n    },\r\n    \"errors\": [\r\n        {\r\n            \"moreInfo\": \"error minimum limit 10\",\r\n            \"userMessage\": \"Bad Request\",\r\n            \"internalMessage\": \"Bad Request\",\r\n            \"code\": 400\r\n        }\r\n    ]\r\n}"
+				},
+				{
+					"name": "Offset minimum error",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8089/items?offset=-1&limit=10",
+							"host": [
+								"localhost"
+							],
+							"port": "8089",
+							"path": [
+								"items"
+							],
+							"query": [
+								{
+									"key": "offset",
+									"value": "-1"
+								},
+								{
+									"key": "limit",
+									"value": "10"
+								}
+							]
+						}
+					},
+					"status": "Bad Request",
+					"code": 400,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json",
+							"name": "Content-Type",
+							"description": "",
+							"type": "text"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status\": 400,\n    \"message\": {\n        \"en\": \"Failed\",\n        \"id\": \"Gagal\"\n    },\n    \"errors\": [\n        {\n            \"moreInfo\": \"error offset cannot be negatif\",\n            \"userMessage\": \"Bad Request\",\n            \"internalMessage\": \"Bad Request\",\n            \"code\": 400\n        }\n    ]\n}"
+				},
+				{
+					"name": "Limit Maxsimum error",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8089/items?offset=0&limit=101",
+							"host": [
+								"localhost"
+							],
+							"port": "8089",
+							"path": [
+								"items"
+							],
+							"query": [
+								{
+									"key": "offset",
+									"value": "0"
+								},
+								{
+									"key": "limit",
+									"value": "101"
+								}
+							]
+						}
+					},
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json",
+							"description": "",
+							"type": "text"
+						}
+					],
+					"cookie": [],
+					"body": "{\r\n    \"status\": 400,\r\n    \"message\": {\r\n        \"en\": \"Failed\",\r\n        \"id\": \"Gagal\"\r\n    },\r\n    \"errors\": [\r\n        {\r\n            \"moreInfo\": \"error maxsimum limit 100\",\r\n            \"userMessage\": \"Bad Request\",\r\n            \"internalMessage\": \"Bad Request\",\r\n            \"code\": 400\r\n        }\r\n    ]\r\n}"
+				},
+				{
+					"name": "Sucess",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8089/items?offset=0&limit=10",
+							"host": [
+								"localhost"
+							],
+							"port": "8089",
+							"path": [
+								"items"
+							],
+							"query": [
+								{
+									"key": "offset",
+									"value": "0"
+								},
+								{
+									"key": "limit",
+									"value": "10"
+								}
+							]
+						}
+					},
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json",
+							"name": "Content-Type",
+							"description": "",
+							"type": "text"
+						}
+					],
+					"cookie": [],
+					"body": "{\r\n    \"status\": 200,\r\n    \"message\": {\r\n        \"en\": \"Success\",\r\n        \"id\": \"Sukses\"\r\n    },\r\n    \"data\": [\r\n        {\r\n            \"id\": 15,\r\n            \"name\": \"Nokia A2342342\",\r\n            \"data\": {\r\n                \"item_details_id\": 10,\r\n                \"cpu_model\": \"AMD Threadripper XXasdaX\",\r\n                \"ram\": \"12 GB\",\r\n                \"year\": 2099,\r\n                \"screen_size\": \"101.0 inch\",\r\n                \"color\": \"Green\",\r\n                \"price\": 10101010\r\n            }\r\n        },\r\n        {\r\n            \"id\": 14,\r\n            \"name\": \"Nokia A79\",\r\n            \"data\": {\r\n                \"item_details_id\": 9,\r\n                \"cpu_model\": \"AMD Threadripper XXX\",\r\n                \"ram\": \"256 GB\",\r\n                \"year\": 2099,\r\n                \"screen_size\": \"101.0 inch\",\r\n                \"price\": 1123123\r\n            }\r\n        },\r\n        {\r\n            \"id\": 9,\r\n            \"name\": \"Nokia A77\",\r\n            \"data\": {\r\n                \"item_details_id\": 8,\r\n                \"cpu_model\": \"AMD Threadripper X\",\r\n                \"ram\": \"128 GB\",\r\n                \"year\": 2099,\r\n                \"screen_size\": \"10.0 inch\",\r\n                \"price\": 1\r\n            }\r\n        },\r\n        {\r\n            \"id\": 7,\r\n            \"name\": \"Samsung S25\",\r\n            \"data\": {\r\n                \"item_details_id\": 6,\r\n                \"cpu_model\": \"Exynos A25\",\r\n                \"ram\": \"64 GB\",\r\n                \"year\": 2024,\r\n                \"color\": \"White\",\r\n                \"price\": 10000000\r\n            }\r\n        },\r\n        {\r\n            \"id\": 6,\r\n            \"name\": \"Samsung S24\",\r\n            \"data\": {\r\n                \"item_details_id\": 5,\r\n                \"cpu_model\": \"Exynos A24\",\r\n                \"ram\": \"32 GB\",\r\n                \"year\": 2024,\r\n                \"screen_size\": \"7.5 inch\",\r\n                \"capacity\": \"128 GB\",\r\n                \"price\": 0\r\n            }\r\n        },\r\n        {\r\n            \"id\": 4,\r\n            \"name\": \"Samsung S23\",\r\n            \"data\": {\r\n                \"item_details_id\": 4,\r\n                \"cpu_model\": \"Exynos A23\",\r\n                \"ram\": \"16 GB\",\r\n                \"year\": 2023,\r\n                \"screen_size\": \"7.4 inch\",\r\n                \"capacity\": \"128 GB\",\r\n                \"color\": \"White\",\r\n                \"price\": 8000000\r\n            }\r\n        },\r\n        {\r\n            \"id\": 3,\r\n            \"name\": \"Komputer Rakitan A\",\r\n            \"data\": {\r\n                \"item_details_id\": 3,\r\n                \"cpu_model\": \"INTEL I5 12400\",\r\n                \"ram\": \"16 GB\",\r\n                \"screen_size\": \"24.0 inch\",\r\n                \"capacity\": \"1024 GB\",\r\n                \"color\": \"White\",\r\n                \"price\": 43000000\r\n            }\r\n        },\r\n        {\r\n            \"id\": 2,\r\n            \"name\": \"Iphone 15 Pro Max\",\r\n            \"data\": {\r\n                \"item_details_id\": 2,\r\n                \"cpu_model\": \"A17\",\r\n                \"year\": 2024,\r\n                \"screen_size\": \"6.1 inch\",\r\n                \"capacity\": \"128 GB\",\r\n                \"color\": \"Titanimum White\",\r\n                \"price\": 21000000\r\n            }\r\n        },\r\n        {\r\n            \"id\": 1,\r\n            \"name\": \"Macbook PRO M1 13 Inch\",\r\n            \"data\": {\r\n                \"item_details_id\": 1,\r\n                \"cpu_model\": \"M1 PRO MAX\",\r\n                \"ram\": \"32 GB\",\r\n                \"year\": 2025,\r\n                \"screen_size\": \"13.5 inch\",\r\n                \"capacity\": \"128 GB\",\r\n                \"color\": \"Black\",\r\n                \"price\": 999999999\r\n            }\r\n        }\r\n    ]\r\n}"
+				}
+			]
+		},
+		{
+			"name": "Item by ID",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8089/items?id=1",
+					"host": [
+						"localhost"
+					],
+					"port": "8089",
+					"path": [
+						"items"
+					],
+					"query": [
+						{
+							"key": "id",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Error Zero / negatif ID",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8089/items?id=0",
+							"host": [
+								"localhost"
+							],
+							"port": "8089",
+							"path": [
+								"items"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "0"
+								}
+							]
+						}
+					},
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json",
+							"description": "",
+							"type": "text"
+						}
+					],
+					"cookie": [],
+					"body": "{\r\n    \"status\": 400,\r\n    \"message\": {\r\n        \"en\": \"Failed\",\r\n        \"id\": \"Gagal\"\r\n    },\r\n    \"errors\": [\r\n        {\r\n            \"moreInfo\": \"error id cannot be negatif\",\r\n            \"userMessage\": \"Bad Request\",\r\n            \"internalMessage\": \"Bad Request\",\r\n            \"code\": 400\r\n        }\r\n    ]\r\n}"
+				},
+				{
+					"name": "ID not found",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8089/items?id=1000",
+							"host": [
+								"localhost"
+							],
+							"port": "8089",
+							"path": [
+								"items"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "1000"
+								}
+							]
+						}
+					},
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json",
+							"name": "Content-Type",
+							"description": "",
+							"type": "text"
+						}
+					],
+					"cookie": [],
+					"body": "{\r\n    \"status\": 404,\r\n    \"message\": {\r\n        \"en\": \"Failed\",\r\n        \"id\": \"Gagal\"\r\n    },\r\n    \"errors\": [\r\n        {\r\n            \"moreInfo\": \"error id cannot be found\",\r\n            \"userMessage\": \"Not Found\",\r\n            \"internalMessage\": \"Not Found\",\r\n            \"code\": 404\r\n        }\r\n    ]\r\n}"
+				},
+				{
+					"name": "Sucess",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8089/items?id=1",
+							"host": [
+								"localhost"
+							],
+							"port": "8089",
+							"path": [
+								"items"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": null
+				}
+			]
+		},
+		{
+			"name": "Create Item",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\":\"Samsung S23\",\r\n    \"cpu_model\": \"Exynos A23\",\r\n    \"ram\": 16,\r\n        \"year\": \"2023\",\r\n            \"screen_size\": 7.4,\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8089/item",
+					"host": [
+						"localhost"
+					],
+					"port": "8089",
+					"path": [
+						"item"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Error Empty name",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\":\"Samsung S23\",\r\n    \"cpu_model\": \"Exynos A23\",\r\n    \"ram\": 16,\r\n        \"year\": \"2023\",\r\n            \"screen_size\": 7.4,\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8089/item",
+							"host": [
+								"localhost"
+							],
+							"port": "8089",
+							"path": [
+								"item"
+							]
+						}
+					},
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": null
+				},
+				{
+					"name": "Error Empty / Zero Optional fields",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\":\"Samsung S23\",\r\n    \"cpu_model\": \"Exynos A23\",\r\n    \"ram\": 16,\r\n        \"year\": \"2023\",\r\n            \"screen_size\": 7.4,\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8089/item",
+							"host": [
+								"localhost"
+							],
+							"port": "8089",
+							"path": [
+								"item"
+							]
+						}
+					},
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": null
+				},
+				{
+					"name": "Error Duplicate name",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\":\"Samsung S23\",\r\n    \"cpu_model\": \"Exynos A23\",\r\n    \"ram\": 16,\r\n        \"year\": \"2023\",\r\n            \"screen_size\": 7.4,\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8089/item",
+							"host": [
+								"localhost"
+							],
+							"port": "8089",
+							"path": [
+								"item"
+							]
+						}
+					},
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": null
+				},
+				{
+					"name": "Success",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "// Please note that RAM and Capacity is in GB and screen_size is in inch\r\n{\r\n    \"name\":\"Samsung S26\",\r\n    \"cpu_model\": \"Exynos 26\",\r\n    \"ram\": 16,\r\n    \"year\": 2026,\r\n    \"capacity\": 256,\r\n    \"screen_size\": 8.1,\r\n    \"color\": \"white\",\r\n    \"price\": 10000000\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8089/item",
+							"host": [
+								"localhost"
+							],
+							"port": "8089",
+							"path": [
+								"item"
+							]
+						}
+					},
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json",
+							"name": "Content-Type",
+							"description": "",
+							"type": "text"
+						}
+					],
+					"cookie": [],
+					"body": "{\r\n    \"status\": 201,\r\n    \"message\": {\r\n        \"en\": \"Success\",\r\n        \"id\": \"Sukses\"\r\n    },\r\n    \"data\": {\r\n        \"id\": 16,\r\n        \"name\": \"Samsung S26\",\r\n        \"data\": {\r\n            \"item_details_id\": 11,\r\n            \"cpu_model\": \"Exynos 26\",\r\n            \"ram\": \"16 GB\",\r\n            \"year\": 2026,\r\n            \"screen_size\": \"8.1 inch\",\r\n            \"capacity\": \"256 GB\",\r\n            \"color\": \"white\",\r\n            \"price\": 10000000\r\n        }\r\n    }\r\n}"
+				}
+			]
+		},
+		{
+			"name": "Delete Item",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "localhost:8089/item?id=8",
+					"host": [
+						"localhost"
+					],
+					"port": "8089",
+					"path": [
+						"item"
+					],
+					"query": [
+						{
+							"key": "id",
+							"value": "8"
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Error Zero / negatif ID",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:8089/item?id=-1",
+							"host": [
+								"localhost"
+							],
+							"port": "8089",
+							"path": [
+								"item"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "-1"
+								}
+							]
+						}
+					},
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json",
+							"description": "",
+							"type": "text"
+						}
+					],
+					"cookie": [
+						{
+							"expires": "Invalid Date"
+						}
+					],
+					"body": "{\r\n    \"status\": 400,\r\n    \"message\": {\r\n        \"en\": \"Failed\",\r\n        \"id\": \"Gagal\"\r\n    },\r\n    \"errors\": [\r\n        {\r\n            \"moreInfo\": \"error id cannot be negatif\",\r\n            \"userMessage\": \"Bad Request\",\r\n            \"internalMessage\": \"Bad Request\",\r\n            \"code\": 400\r\n        }\r\n    ]\r\n}"
+				},
+				{
+					"name": "ID not found",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:8089/item?id=-1",
+							"host": [
+								"localhost"
+							],
+							"port": "8089",
+							"path": [
+								"item"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "-1"
+								}
+							]
+						}
+					},
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json",
+							"description": "",
+							"type": "text"
+						}
+					],
+					"cookie": [],
+					"body": "{\r\n    \"status\": 404,\r\n    \"message\": {\r\n        \"en\": \"Failed\",\r\n        \"id\": \"Gagal\"\r\n    },\r\n    \"errors\": [\r\n        {\r\n            \"moreInfo\": \"error id cannot be found\",\r\n            \"userMessage\": \"Not Found\",\r\n            \"internalMessage\": \"Not Found\",\r\n            \"code\": 404\r\n        }\r\n    ]\r\n}"
+				},
+				{
+					"name": "Sucess",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8089/items?id=1",
+							"host": [
+								"localhost"
+							],
+							"port": "8089",
+							"path": [
+								"items"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": null
+				}
+			]
+		},
+		{
+			"name": "Update Item",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id\": 1,\r\n    \"name\":\"\",\r\n    \"cpu_model\": \"gatau\",\r\n    \"ram\": 2,\r\n    \"year\": 1945,\r\n    \"screen_size\": 4.5,\r\n    \"price\": 100000000000\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8089/item",
+					"host": [
+						"localhost"
+					],
+					"port": "8089",
+					"path": [
+						"item"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Error Zero / negatif ID",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": 0,\r\n    \"color\": \"Green\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8089/items",
+							"host": [
+								"localhost"
+							],
+							"port": "8089",
+							"path": [
+								"items"
+							]
+						}
+					},
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json",
+							"description": "",
+							"type": "text"
+						}
+					],
+					"cookie": [],
+					"body": "{\r\n    \"status\": 400,\r\n    \"message\": {\r\n        \"en\": \"Failed\",\r\n        \"id\": \"Gagal\"\r\n    },\r\n    \"errors\": [\r\n        {\r\n            \"moreInfo\": \"error id cannot be negatif\",\r\n            \"userMessage\": \"Bad Request\",\r\n            \"internalMessage\": \"Bad Request\",\r\n            \"code\": 400\r\n        }\r\n    ]\r\n}"
+				},
+				{
+					"name": "ID not found",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": 101,\r\n    \"color\": \"Green\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8089/items",
+							"host": [
+								"localhost"
+							],
+							"port": "8089",
+							"path": [
+								"items"
+							]
+						}
+					},
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json",
+							"description": "",
+							"type": "text"
+						}
+					],
+					"cookie": [],
+					"body": "{\r\n    \"status\": 404,\r\n    \"message\": {\r\n        \"en\": \"Failed\",\r\n        \"id\": \"Gagal\"\r\n    },\r\n    \"errors\": [\r\n        {\r\n            \"moreInfo\": \"error id cannot be found\",\r\n            \"userMessage\": \"Not Found\",\r\n            \"internalMessage\": \"Not Found\",\r\n            \"code\": 404\r\n        }\r\n    ]\r\n}"
+				},
+				{
+					"name": "Error Empty name",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\":\"Samsung S23\",\r\n    \"cpu_model\": \"Exynos A23\",\r\n    \"ram\": 16,\r\n        \"year\": \"2023\",\r\n            \"screen_size\": 7.4,\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8089/item",
+							"host": [
+								"localhost"
+							],
+							"port": "8089",
+							"path": [
+								"item"
+							]
+						}
+					},
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": null
+				},
+				{
+					"name": "Error Empty / Zero Optional fields",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "/* \r\nAll of the field is optional like name, ram etc, you can update\r\njust what you needed, you dont need to input in body, if it not\r\nnessesary.\r\n*/\r\n{\r\n    \"id\": 1, // required\r\n    \"color\": \"\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8089/item",
+							"host": [
+								"localhost"
+							],
+							"port": "8089",
+							"path": [
+								"item"
+							]
+						}
+					},
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json",
+							"name": "Content-Type",
+							"description": "",
+							"type": "text"
+						}
+					],
+					"cookie": [],
+					"body": "{\r\n    \"status\": 400,\r\n    \"message\": {\r\n        \"en\": \"Failed\",\r\n        \"id\": \"Gagal\"\r\n    },\r\n    \"errors\": [\r\n        {\r\n            \"moreInfo\": \"error color cannot be empty\",\r\n            \"userMessage\": \"Bad Request\",\r\n            \"internalMessage\": \"Bad Request\",\r\n            \"code\": 400\r\n        }\r\n    ]\r\n}"
+				},
+				{
+					"name": "Error Duplicate name",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "/* \r\nName that already been registered, cannot be used anymore, each name of items\r\nneed to be unique\r\n*/\r\n{\r\n    \"id\": 1, // required\r\n    \"name\":\"Samsung S26\",\r\n    \"cpu_model\": \"Exynos 26\",\r\n    \"ram\": 16,\r\n    \"year\": 2026,\r\n    \"capacity\": 256,\r\n    \"screen_size\": 8.1,\r\n    \"color\": \"white\",\r\n    \"price\": 10000000\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8089/item",
+							"host": [
+								"localhost"
+							],
+							"port": "8089",
+							"path": [
+								"item"
+							]
+						}
+					},
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json",
+							"name": "Content-Type",
+							"description": "",
+							"type": "text"
+						}
+					],
+					"cookie": [],
+					"body": "{\r\n    \"status\": 400,\r\n    \"message\": {\r\n        \"en\": \"Failed\",\r\n        \"id\": \"Gagal\"\r\n    },\r\n    \"errors\": [\r\n        {\r\n            \"moreInfo\": \"error duplicate item name\",\r\n            \"userMessage\": \"Bad Request\",\r\n            \"internalMessage\": \"Bad Request\",\r\n            \"code\": 400\r\n        }\r\n    ]\r\n}"
+				},
+				{
+					"name": "Success",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "/* \r\nAll of the field is optional like name, ram etc, you can update\r\njust what you needed, you dont need to input in body, if it not\r\nnessesary.\r\n*/\r\n{\r\n    \"id\": 1, // required\r\n    \"name\":\"Samsung S26\",\r\n    \"cpu_model\": \"Exynos 26\",\r\n    \"ram\": 16,\r\n    \"year\": 2026,\r\n    \"capacity\": 256,\r\n    \"screen_size\": 8.1,\r\n    \"color\": \"white\",\r\n    \"price\": 10000000\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8089/item",
+							"host": [
+								"localhost"
+							],
+							"port": "8089",
+							"path": [
+								"item"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json",
+							"description": "",
+							"type": "text"
+						}
+					],
+					"cookie": [],
+					"body": "{\r\n    \"status\": 200,\r\n    \"message\": {\r\n        \"en\": \"Success\",\r\n        \"id\": \"Sukses\"\r\n    },\r\n    \"data\": {\r\n        \"id\": 16,\r\n        \"name\": \"Samsung S26\",\r\n        \"data\": {\r\n            \"item_details_id\": 11,\r\n            \"cpu_model\": \"Exynos 26\",\r\n            \"ram\": \"16 GB\",\r\n            \"year\": 2026,\r\n            \"screen_size\": \"8.1 inch\",\r\n            \"capacity\": \"256 GB\",\r\n            \"color\": \"white\",\r\n            \"price\": 10000000\r\n        }\r\n    }\r\n}"
+				}
+			]
+		}
+	]
+}
